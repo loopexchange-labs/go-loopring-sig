@@ -37,7 +37,7 @@ func bnToBufWithFixedLength(bn *big.Int, outputLength int) []int64 {
 	return u
 }
 
-func GenerateKeyPair(signature string) interface{} {
+func GenerateKeyPair(signature string) KeyPair {
 	signatureBigInt := new(big.Int)
 	signatureBigInt.SetString(strings.TrimPrefix(signature, "0x"), 16)
 
@@ -61,14 +61,9 @@ func GenerateKeyPair(signature string) interface{} {
 	copySecretKey := new(big.Int).Set(secretKey)
 	publicKey := eddsa.NewPoint().Mul(copySecretKey, eddsa.B8)
 
-	return map[string]interface{}{
-		"keyPair": map[string]interface{}{
-			"publicKeyX": publicKey.X.String(),
-			"publicKeyY": publicKey.Y.String(),
-			"secretKey":  secretKey.String(),
-		},
-		"formatedPx": fmt.Sprintf("0x%064s", publicKey.X.Text(16)),
-		"formatedPy": fmt.Sprintf("0x%064s", publicKey.Y.Text(16)),
-		"sk":         fmt.Sprintf("0x%s", secretKey.Text(16)),
+	return KeyPair{
+		SecretKey:  secretKey,
+		PublicKeyX: publicKey.X,
+		PublicKeyY: publicKey.Y,
 	}
 }
