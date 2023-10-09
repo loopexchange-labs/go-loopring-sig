@@ -2,6 +2,7 @@ package loopring
 
 import (
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"math/big"
 	"strconv"
@@ -37,11 +38,20 @@ func bnToBufWithFixedLength(bn *big.Int, outputLength int) []int64 {
 	return u
 }
 
-func GenerateKeyPair(signature string) KeyPair {
-	signatureBigInt := new(big.Int)
-	signatureBigInt.SetString(strings.TrimPrefix(signature, "0x"), 16)
+func padToEven(s string) string {
+	if len(s)%2 != 0 {
+		return fmt.Sprintf("0%s", s)
+	}
+	return s
+}
 
-	hash := sha256.Sum256(signatureBigInt.Bytes())
+func GenerateKeyPair(signature string) (KeyPair, error) {
+	signatureBytes, err := hex.DecodeString(padToEven(strings.TrimPrefix(signature, "0x")))
+	if err != nil {
+		return KeyPair{}, err
+	}
+
+	hash := sha256.Sum256(signatureBytes)
 	seedBuff := hash[:]
 
 	seed := new(big.Int)
@@ -65,5 +75,5 @@ func GenerateKeyPair(signature string) KeyPair {
 		SecretKey:  secretKey,
 		PublicKeyX: publicKey.X,
 		PublicKeyY: publicKey.Y,
-	}
+	}, nil
 }

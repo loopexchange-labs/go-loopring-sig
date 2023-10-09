@@ -79,11 +79,33 @@ func TestGenerateKeyPair(t *testing.T) {
 				SecretKey:  "0x5db65ed466a3b154dcf83e2e4b06b66c0c305d7d2088f9f60031567cf080dc1",
 			},
 		},
+		{
+			name: "00 prefix",
+			args: args{
+				signature: "0x00c4fafca785d8b4da5e15265e4e58767a3f2502cdea2fcc4408cee5149e2a697fb7aaba14dceb096abd78cd4e9576859dcef262a4b51f2bb4554ebfd4fb72f5cf02",
+			},
+			want: map[string]interface{}{
+				"keyPair": map[string]interface{}{
+					"publicKeyX": "13177128602008476316648007186770414467529839960903001891999762356783519376339",
+					"publicKeyY": "12345804151819755343032722751269003874303422211927604135345729794881772258791",
+					"secretKey":  "110363126876775936939184191137732252584845853294910358210190810231166593026",
+				},
+				"formatedPx": "0x1d21fd9096f5e99a270d0692b2e88127669a6980029513b1ca1459bea0e423d3",
+				"formatedPy": "0x1b4b7a3ef37cb12bdd53c1dd25e71c032c6a06ab1490dbafc7c304bbbf1305e7",
+				"sk":         "0x3e769be3e46e6ca29d3b493f3ddfd7b66b18f404f4bd6e9f3d51a791f9e802",
+			},
+			want2: KeyPairFormatted{
+				PublicKeyX: "0x1d21fd9096f5e99a270d0692b2e88127669a6980029513b1ca1459bea0e423d3",
+				PublicKeyY: "0x1b4b7a3ef37cb12bdd53c1dd25e71c032c6a06ab1490dbafc7c304bbbf1305e7",
+				SecretKey:  "0x3e769be3e46e6ca29d3b493f3ddfd7b66b18f404f4bd6e9f3d51a791f9e802",
+			},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := GenerateKeyPair(tt.args.signature)
+			got, err := GenerateKeyPair(tt.args.signature)
 
+			assert.NoError(t, err)
 			assert.Equal(t, tt.want, map[string]interface{}{
 				"keyPair": map[string]interface{}{
 					"publicKeyX": got.PublicKeyX.String(),
