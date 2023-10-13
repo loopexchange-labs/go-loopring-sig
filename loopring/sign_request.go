@@ -9,16 +9,9 @@ import (
 
 	"github.com/loopexchange-labs/go-loopring-sig/constants"
 	"github.com/loopexchange-labs/go-loopring-sig/eddsa"
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
 )
 
-func SignRequest(privateKey string, method string, baseUrl string, path string, data string) (string, error) {
-	privateKeyBig := new(big.Int)
-	privateKeyBig.SetString(strings.TrimPrefix(privateKey, "0x"), 16)
-
-	var pk eddsa.PrivateKey //lint:ignore S1021 conversion
-	pk = utils.BigIntLEBytes(privateKeyBig)
-
+func SignRequest(privateKey *eddsa.PrivateKey, method string, baseUrl string, path string, data string) (string, error) {
 	methodParsed := strings.ToUpper(method)
 
 	var params string
@@ -38,7 +31,7 @@ func SignRequest(privateKey string, method string, baseUrl string, path string, 
 	messageToSign := q.Mod(q, constants.Q)
 	// messageToSignStr := messageToSign.String()
 
-	sig := pk.SignPoseidon(messageToSign)
+	sig := privateKey.SignPoseidon(messageToSign)
 
 	sigReply := "0x" +
 		fmt.Sprintf("%064s", sig.R8.X.Text(16)) +

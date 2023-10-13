@@ -33,7 +33,8 @@ func TestSignRequest(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := SignRequest(tt.args.privateKey, tt.args.method, tt.args.baseUrl, tt.args.path, tt.args.data)
+			pk := NewPrivateKeyFromString(tt.args.privateKey)
+			got, err := SignRequest(pk, tt.args.method, tt.args.baseUrl, tt.args.path, tt.args.data)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("SignRequest() error = %v, wantErr %v", err, tt.wantErr)
 				return
