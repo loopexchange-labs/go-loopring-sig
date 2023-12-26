@@ -6,8 +6,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/loopexchange-labs/go-loopring-sig/constants"
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
+	"github.com/loopring/go-loopring-sig/constants"
+	"github.com/loopring/go-loopring-sig/utils"
 	"github.com/stretchr/testify/assert"
 )
 

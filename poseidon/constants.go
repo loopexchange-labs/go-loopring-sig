@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/loopexchange-labs/go-loopring-sig/ff"
+	"github.com/loopring/go-loopring-sig/ff"
 )
 
 type constantsStr struct {

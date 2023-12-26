@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/loopexchange-labs/go-loopring-sig/poseidon"
+	"github.com/loopring/go-loopring-sig/poseidon"
 )
 
 func GetNftData(

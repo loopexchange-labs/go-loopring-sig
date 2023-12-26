@@ -5,8 +5,8 @@ import (
 	// "fmt"
 	"math/big"
 
-	"github.com/loopexchange-labs/go-loopring-sig/ff"
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
+	"github.com/loopring/go-loopring-sig/ff"
+	"github.com/loopring/go-loopring-sig/utils"
 )
 
 const NROUNDSF = 6 //nolint:golint

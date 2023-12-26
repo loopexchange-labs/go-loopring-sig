@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/loopexchange-labs/go-loopring-sig/eddsa"
+	"github.com/loopring/go-loopring-sig/eddsa"
 )
 
 func bnToBufWithFixedLength(bn *big.Int, outputLength int) []int64 {
