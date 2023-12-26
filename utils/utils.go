@@ -7,8 +7,8 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/loopexchange-labs/go-loopring-sig/constants"
-	"github.com/loopexchange-labs/go-loopring-sig/ff"
+	"github.com/loopring/go-loopring-sig/constants"
+	"github.com/loopring/go-loopring-sig/ff"
 )
 
 // NewIntFromString creates a new big.Int from a decimal integer encoded as a

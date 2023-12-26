@@ -4,7 +4,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
+	"github.com/loopring/go-loopring-sig/utils"
 	"github.com/stretchr/testify/assert"
 )
 

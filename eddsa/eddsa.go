@@ -4,9 +4,9 @@ import (
 	"crypto/sha512"
 	"math/big"
 
-	"github.com/loopexchange-labs/go-loopring-sig/ff"
-	"github.com/loopexchange-labs/go-loopring-sig/poseidon"
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
+	"github.com/loopring/go-loopring-sig/ff"
+	"github.com/loopring/go-loopring-sig/poseidon"
+	"github.com/loopring/go-loopring-sig/utils"
 )
 
 // PrivateKey is an EdDSA private key, which is a 32byte buffer.

@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/loopexchange-labs/go-loopring-sig/eddsa"
-	"github.com/loopexchange-labs/go-loopring-sig/utils"
+	"github.com/loopring/go-loopring-sig/eddsa"
+	"github.com/loopring/go-loopring-sig/utils"
 )
 
 func NewPrivateKeyFromString(privateKeyString string) *eddsa.PrivateKey {

@@ -7,8 +7,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/loopexchange-labs/go-loopring-sig/constants"
-	"github.com/loopexchange-labs/go-loopring-sig/eddsa"
+	"github.com/loopring/go-loopring-sig/constants"
+	"github.com/loopring/go-loopring-sig/eddsa"
 )
 
 func SignRequest(privateKey *eddsa.PrivateKey, method string, baseUrl string, path string, data string) (string, error) {
