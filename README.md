@@ -25,3 +25,12 @@ gomobile bind -target=ios .
 This command will generate a binary according to the target platform.
 
 Drag the binary into project and build.
+
+### Android 
+
+```
+mkdir android
+gomobile bind  -target=android  -o ./android/loopringGoSign.aar
+```
+
+You can find the aar file in the android directory.

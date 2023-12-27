@@ -1,9 +1,10 @@
-package loopringsdk
+package loopringGoSign
 
 import "C"
 import (
 	"fmt"
 	"math/big"
+	"strings"
 
 	"github.com/loopring/go-loopring-sig/loopring"
 	"github.com/loopring/go-loopring-sig/poseidon"
@@ -45,7 +46,7 @@ import (
 // 	return signedMessage, nil
 // }
 
-func SignEddsa(privateKey string, hash string) (string) {
+func SignEddsa(privateKey string, hash string) string {
 	pk := loopring.NewPrivateKeyFromString(privateKey)
 	sig := pk.SignPoseidon(utils.NewIntFromString(hash))
 
@@ -55,23 +56,32 @@ func SignEddsa(privateKey string, hash string) (string) {
 		fmt.Sprintf("%064s", sig.S.Text(16))
 }
 
-func PoseidonHash(input string) (string) {
-	hash, err := poseidon.Hash([]*big.Int{
-		utils.NewIntFromString(input),
-	})
+func PoseidonHash(input string) string {
+	data := strings.Split(input, ",")
+	size := len(data)
+	bigData := make([]*big.Int, size)
+	for i := range bigData {
+		bigData[i] = utils.NewIntFromString(data[i])
+	}
+
+	hash, err := poseidon.Hash(bigData)
 	if err != nil {
 		return ""
 	}
 
-	return "0x" + hash.Text(16)
+	return hash.String()
 }
 
-// func SignRequest(privateKey string, method string, baseUrl string, path string, data string) (string, error) {
-// 	return loopring.SignRequest(
-// 		loopring.NewPrivateKeyFromString(privateKey),
-// 		method,
-// 		baseUrl,
-// 		path,
-// 		data,
-// 	)
-// }
+func SignRequest(privateKey string, method string, url string, data string) string {
+	result, err := loopring.SignRequest(
+		loopring.NewPrivateKeyFromString(privateKey),
+		method,
+		url,
+		"",
+		data,
+	)
+	if err != nil {
+		return ""
+	}
+	return result
+}
